@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Vue-stackedit</title>
+  <link rel="stylesheet" href="./lovue.min.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./iconfont.js"></script>
+  <script src="./lovue.min.js"></script>
+  <script src="./utils.js"></script>
+  <script>
+    window.$fetch = utils.fetch
+  </script>
+  <style>
+    body {
+      background-color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 40px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <v-button style="margin: 8px;" @click="getContent">Get Content</v-button>
+  <app></app>
+</div>
+<!-- built files will be auto injected -->
+</body>
+</html>

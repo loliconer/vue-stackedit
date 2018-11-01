@@ -1,0 +1,391 @@
+@import "Variables";
+@import (reference) "Mixins";
+
+.v-editor {
+  background-color: @bg-color;
+  border: 1px solid @border-color;
+
+  .btn-text {
+    .mixin-base-button;
+    min-width: inherit;
+  }
+
+  .v-popup {
+    .win-content {
+      min-width: 800px;
+      padding: 0;
+
+      .upload-url {
+        margin-bottom: 20px;
+
+        .v-input {
+          width: 500px;
+          border-radius: @border-radius-small;
+        }
+      }
+
+      .upload-file {
+        margin-bottom: 20px;
+      }
+
+      .upload-submit {
+        padding: 10px;
+        .vue-submit-button {
+          margin-left: auto;
+          display: block;
+        }
+      }
+    }
+
+    .v-tab-wrap {
+      display: flex;
+      border-bottom: 1px solid @border-color;
+    }
+
+    .v-tab {
+      box-shadow: none;
+      font-size: @small-font;
+      border-bottom: none;
+
+      .tabs {
+        .tab {
+          width: 140px;
+          height: 40px;
+          line-height: 40px;
+          justify-content: center;
+        }
+      }
+    }
+
+    .up-panel {
+      padding: 20px;
+      min-height: 200px;
+    }
+  }
+
+  .cl-toc-section {
+    display: none;
+  }
+  .ve-nav-bar {
+    height: 36px;
+    line-height: 30px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid @border-color;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: @assist-font-color;
+      transition: color .2s;
+    }
+
+    .btn-text {
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      border: 1px solid transparent;
+
+      &:hover {
+        border-color: @border-color;
+
+        svg {
+          color: @first-level-color;
+        }
+      }
+    }
+  }
+
+  .ve-body {
+    display: flex;
+    line-height: 1.5;
+    height: 500px;
+  }
+
+  .ve-editor {
+    width: calc(50% - 15px);
+    height: 100%;
+    overflow: auto;
+
+    &.expand {
+      width: calc(100% - 30px);
+    }
+  }
+
+  .ve-preview {
+    width: calc(50% - 15px);
+    height: 100%;
+    overflow: auto;
+
+    &.expand {
+      width: calc(100% - 30px);
+
+      .preview-inner {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .markdown-highlighting {
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+      font-weight: bold;
+    }
+
+    .h1 {
+      font-size: 2em;
+    }
+
+    .h2 {
+      font-size: 1.5em;
+    }
+
+    .h3 {
+      font-size: 1.17em;
+    }
+
+    .h4 {
+      font-size: 1em;
+    }
+
+    .h5 {
+      font-size: .83em;
+    }
+
+    .h6 {
+      font-size: .75em;
+    }
+
+    .pre {
+      .mixin-md-pre-font;
+      color: rgba(0, 0, 0, .8);
+      line-height: 1.33;
+
+      &[class*=language-] {
+        color: @black-color;
+      }
+    }
+
+    .code {
+      .mixin-md-pre-font;
+    }
+
+    .tag {
+      color: rgba(0, 0, 0, .8);
+
+      font-weight: 600;
+
+      .attr-name,
+      .attr-value,
+      .punctuation {
+        font-weight: 400;
+      }
+    }
+
+    .latex,
+    .math {
+      color: rgba(0, 0, 0, .8);
+    }
+
+    .entity {
+      .mixin-md-pre-font;
+      color: rgba(0, 0, 0, .8);
+      font-style: italic;
+    }
+
+    .table {
+      .mixin-md-pre-font;
+      display: inline;
+      border: none;
+    }
+
+    .keyword {
+      color: @black-color;
+      font-weight: 600;
+    }
+
+    .cl-toc,
+    .code,
+    .img,
+    .img-wrapper,
+    .imgref {
+      background-color: rgba(0, 0, 0, .05);
+      border-radius: 2px;
+      padding: .15em 0;
+    }
+
+    .img-wrapper {
+      display: inline-block;
+
+      .img {
+        display: inline-block;
+        padding: 0;
+        background-color: transparent;
+      }
+
+      img {
+        max-width: 100%;
+        padding: 0 .15em;
+      }
+    }
+
+    .cl-toc {
+      font-size: 2.8em;
+      padding: .15em
+    }
+
+    .blockquote {
+      color: rgba(0, 0, 0, .48)
+    }
+
+    .cl-hash {
+      color: rgba(0, 0, 0, .28)
+    }
+
+    .cl, .hr {
+      color: rgba(0, 0, 0, .28);
+      font-style: normal;
+      font-weight: 400
+    }
+
+    .em {
+      font-style: italic
+    }
+
+    .strong, .term {
+      font-weight: 600
+    }
+
+    .cl-del-text {
+      text-decoration: line-through
+    }
+
+    .cl-underlined-text,
+    .email,
+    .url {
+      text-decoration: underline
+    }
+
+    .linkdef {
+      .url {
+        color: rgba(0, 0, 0, .28)
+      }
+    }
+
+    .fn, .inlinefn, .sup {
+      font-size: smaller;
+      position: relative;
+      top: -.5em
+    }
+
+    .sub {
+      bottom: -.25em;
+      font-size: smaller;
+      position: relative
+    }
+
+    .img, .imgref, .link, .linkref {
+      color: rgba(0, 0, 0, .28);
+
+      .cl-underlined-text {
+        color: @black-color;
+      }
+    }
+
+    .cl-title {
+      color: rgba(0, 0, 0, .8)
+    }
+  }
+
+  .editor-inner {
+    margin: 0;
+    font-family: inherit;
+    font-variant-ligatures: no-common-ligatures;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: @white-color;
+    padding: 10px 20px 287px;
+    min-height: 100%;
+
+    &.monospaced {
+      .mixin-md-pre-font;
+    }
+
+    .hide {
+      display: none;
+    }
+  }
+
+  .preview-inner {
+    position: relative;
+    padding: 10px 20px 287px;
+    font-variant-ligatures: no-common-ligatures;
+    min-height: 100%;
+
+    > :first-child {
+      > :first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .ve-button {
+    width: 30px;
+    height: 100%;
+
+    .button-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+      height: 100%;
+      text-align: center;
+
+      .btn-text {
+        padding: 0;
+        width: 28px;
+        height: 28px;
+        line-height: 26px;
+        margin: 2px 0;
+
+        &:hover {
+          svg {
+            color: @first-level-color;
+          }
+        }
+
+        &.focus {
+          svg {
+            color: @first-level-color;
+          }
+        }
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: @assist-font-color;
+      transition: color .2s;
+
+      path, rect {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &.fullscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+
+    .ve-body {
+      height: calc(100vh - 36px);
+    }
+  }
+}

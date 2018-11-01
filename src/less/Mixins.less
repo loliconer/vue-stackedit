@@ -1,0 +1,275 @@
+@import "Variables";
+
+.hvcenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+}
+
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.hyphenate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shadow-light {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+}
+
+.shadow {
+  //box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-3 {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-4 {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-5 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+.hoverable {
+  transition: box-shadow .25s;
+  &:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+.non-select() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.mixin-table(@line-height: 40px; @bordered: false; @striped: false) {
+  width: 100%;
+  text-align: left;
+  font-size: @small-font;
+  border: 1px solid @border-color;
+
+  caption {
+    margin-bottom: 10px;
+    font-size: @normal-font;
+  }
+
+  thead {
+    border-bottom: 1px solid @border-color;
+    background-color: #F5F6FA;
+
+    tr {
+      height: @line-height;
+      th {
+        padding: 0 15px;
+        font-weight: normal;
+        color: @assist-font-color;
+        white-space: nowrap;
+
+        & when (@bordered = true) {
+          border-right: 1px solid @border-color;
+
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
+  }
+  tbody {
+    & when (@striped = true) {
+      tr:nth-child(odd) {
+        background-color: @bg-color;
+      }
+    }
+
+    tr {
+      height: @line-height;
+      transition: background-color .25s ease;
+      border-bottom: 1px solid @border-color;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: @bg-color;
+      }
+
+      &.row-loading {
+        text-align: center;
+      }
+
+      td {
+        padding: 0 15px;
+        white-space: nowrap;
+
+        & when (@bordered = true) {
+          border-right: 1px solid @border-color;
+
+          &:last-child {
+            border-right: none;
+          }
+        }
+
+        &.no-data-info {
+          text-align: center;
+          color: @assist-font-color;
+        }
+      }
+    }
+
+    .btn-text {
+      color: @blue-color;
+
+      &:hover {
+        color: @hover-blue-color;
+      }
+    }
+  }
+}
+
+.mixin-transition(@property, @time: .2s, @function: ease-out) {
+  will-change: @property;
+  transition: @property @time @function;
+}
+
+.mixin-hidden() {
+  //visibility: hidden;
+  //transform: rotateY(90deg);
+  //will-change: transform;
+  //transition: transform .4s ease-out;
+  display: none;
+}
+
+.mixin-visible() {
+  //visibility: visible;
+  //transform: rotateY(0deg);
+  display: block;
+}
+
+.mixin-base-button() {
+  display: inline-block;
+  font-size: @small-font;
+  text-align: center;
+  padding: 0 12px;
+  height: 30px;
+  line-height: 28px;
+  min-width: 72px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: @border-radius-small;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.mixin-button-solid() {
+  background-color: @blue-color;
+  color: @white-color;
+
+  &:hover {
+    background-color: @hover-blue-color;
+  }
+
+  &:active {
+    background-color: @active-blue-color;
+  }
+}
+
+.mixin-button-ghost() {
+  border-color: @blue-color;
+  line-height: 28px;
+  color: @blue-color;
+
+  &:hover {
+    border-color: @hover-blue-color;
+    color: @hover-blue-color;
+  }
+  &:active {
+    border-color: @active-blue-color;
+    color: @active-blue-color;
+  }
+}
+
+.mixin-content-width() {
+  width: 60vw;
+  min-width: @min-width;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-start {
+  .flex;
+  align-items: center;
+}
+
+.flex-between {
+  .flex-start;
+  justify-content: space-between;
+}
+
+.flex-center {
+  .flex-start;
+  justify-content: center;
+}
+
+.flex-around {
+  .flex-start;
+  justify-content: space-around;
+}
+
+.mixin-submit-loading-center() {
+  position: relative;
+
+  .vue-loading {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(50px);
+  }
+}
+
+.mixin-bg-body {
+  background-color: @bg-color;
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+.mixin-md-pre-font {
+  font-family: Roboto Mono, Lucida Sans Typewriter, Lucida Console, monaco, Courrier, monospace;
+  font-size: .85em;
+}
+
+.mixin-link {
+  transition: color .2s;
+
+  &:hover {
+    color: @hover-blue-color;
+  }
+}
