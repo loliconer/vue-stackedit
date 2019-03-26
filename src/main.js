@@ -6,7 +6,7 @@ new Vue({
   components: { App },
   methods: {
     getContent() {
-      this.$modal({
+      this.modal({
         content: App.methods.getContent()
       })
     }

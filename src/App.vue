@@ -2,23 +2,21 @@
   <div class="v-editor" :class="{fullscreen: fullscreen}">
     <custom-svg/>
     <v-popup title="上传图片" v-model="showUpload" :confirm="uploadImage">
-      <template slot="content">
-        <div class="v-tab-wrap">
-          <v-tab :titles="tabTitles" @select="selectTab"></v-tab>
+      <div class="v-tab-wrap">
+        <v-tab :titles="tabTitles" v-model="tabIndex"></v-tab>
+      </div>
+      <div class="up-panel upload-url" v-if="tabIndex === 0">
+        <div class="input-url">
+          <label class="label">图片地址：</label>
+          <v-input v-model="imageUrl"></v-input>
         </div>
-        <div class="up-panel upload-url" v-if="uploadUrl">
-          <div class="input-url">
-            <label class="label">图片地址：</label>
-            <v-input v-model="imageUrl"></v-input>
-          </div>
-        </div>
+      </div>
 
-        <div class="up-panel upload-file" v-else>
-          <div class="input-file">
-            <v-upload @select="selectFiles" thumbnail></v-upload>
-          </div>
+      <div class="up-panel upload-file" v-if="tabIndex === 1">
+        <div class="input-file">
+          <v-upload @select="selectFiles" thumbnail></v-upload>
         </div>
-      </template>
+      </div>
     </v-popup>
 
     <div class="ve-head" v-show="showNavigationBar">
@@ -55,9 +53,9 @@
           { name: '上传网络图片' },
           { name: '上传本地图片' }
         ],
+        tabIndex: 0,
         showUpload: false,
         imageUrl: '',
-        uploadUrl: true,
         files: []
       }
     },
@@ -74,12 +72,9 @@
       clickNavbar(cmd) {
         if (cmd === 'image') {
           this.imageUrl = ''
-          this.uploadUrl = true
+          this.tabIndex = 0
           this.showUpload = true
         }
-      },
-      selectTab(i) {
-        this.uploadUrl = i === 0
       },
       selectFiles(files) {
         this.files = files
@@ -90,7 +85,7 @@
           form.append(this.uploadField || 'files', this.files[i])
         }
 
-        if (this.uploadUrl) {
+        if (this.tabIndex === 0) {
           if (this.imageUrl === '') {
             this.warn('请填写图片地址')
             return false
