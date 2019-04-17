@@ -1,50 +1,60 @@
-@import "Variables";
-@import (reference) "Mixins";
+.mixin-md-pre-font {
+  font-family: Roboto Mono, Lucida Sans Typewriter, Lucida Console, monaco, Courrier, monospace;
+  font-size: .85em;
+}
 
 .v-editor {
-  background-color: @bg-color;
-  border: 1px solid @border-color;
+  --bg-color: #f5f5f5;
+  --border-color: #e9e9e9;
+  --small-font: 1.4rem;
+  --main-color: #222222;
+  --second-color: #919191;
+
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
 
   .btn-text {
-    .mixin-base-button;
+    display: inline-block;
+    font-size: var(--small-font);
+    text-align: center;
+    padding: 0 12px;
+    height: 30px;
+    line-height: 28px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all .3s;
     min-width: inherit;
+    cursor: pointer;
   }
 
   .v-popup {
-    .win-content {
+    .v-window {
       min-width: 800px;
+    }
+
+    .win-content {
       padding: 0;
 
       .upload-url {
-        margin-bottom: 20px;
+        .label {
+          font-size: var(--small-font);
+        }
 
         .v-input {
           width: 500px;
-          border-radius: @border-radius-small;
-        }
-      }
-
-      .upload-file {
-        margin-bottom: 20px;
-      }
-
-      .upload-submit {
-        padding: 10px;
-        .vue-submit-button {
-          margin-left: auto;
-          display: block;
+          border-radius: 4px;
         }
       }
     }
 
     .v-tab-wrap {
       display: flex;
-      border-bottom: 1px solid @border-color;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .v-tab {
-      box-shadow: none;
-      font-size: @small-font;
+      font-size: var(--small-font);
       border-bottom: none;
 
       .tabs {
@@ -58,7 +68,7 @@
     }
 
     .up-panel {
-      padding: 20px;
+      padding: 24px;
       min-height: 200px;
     }
   }
@@ -66,18 +76,19 @@
   .cl-toc-section {
     display: none;
   }
+
   .ve-nav-bar {
     height: 36px;
     line-height: 30px;
     padding: 3px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid var(--border-color);
 
     svg {
       width: 14px;
       height: 14px;
-      color: @assist-font-color;
+      color: var(--second-color);
       transition: color .2s;
     }
 
@@ -88,10 +99,10 @@
       border: 1px solid transparent;
 
       &:hover {
-        border-color: @border-color;
+        border-color: var(--border-color);
 
         svg {
-          color: @first-level-color;
+          color: var(--main-color);
         }
       }
     }
@@ -163,7 +174,7 @@
       line-height: 1.33;
 
       &[class*=language-] {
-        color: @black-color;
+        color: #000;
       }
     }
 
@@ -201,7 +212,7 @@
     }
 
     .keyword {
-      color: @black-color;
+      color: #000;
       font-weight: 600;
     }
 
@@ -289,7 +300,7 @@
       color: rgba(0, 0, 0, .28);
 
       .cl-underlined-text {
-        color: @black-color;
+        color: #000;
       }
     }
 
@@ -305,7 +316,7 @@
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
-    background-color: @white-color;
+    background-color: #fff;
     padding: 10px 20px 287px;
     min-height: 100%;
 
@@ -352,13 +363,13 @@
 
         &:hover {
           svg {
-            color: @first-level-color;
+            color: var(--main-color);
           }
         }
 
         &.focus {
           svg {
-            color: @first-level-color;
+            color: var(--main-color);
           }
         }
       }
@@ -367,7 +378,7 @@
     svg {
       width: 20px;
       height: 20px;
-      color: @assist-font-color;
+      color: var(--second-color);
       transition: color .2s;
 
       path, rect {

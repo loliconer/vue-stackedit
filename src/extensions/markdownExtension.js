@@ -1,10 +1,10 @@
-import Prism from 'prismjs';
-import markdownitAbbr from 'markdown-it-abbr';
-import markdownitDeflist from 'markdown-it-deflist';
-import markdownitFootnote from 'markdown-it-footnote';
-import markdownitSub from 'markdown-it-sub';
-import markdownitSup from 'markdown-it-sup';
-import extensionSvc from '../services/extensionSvc';
+import Prism from 'prismjs'
+import markdownitAbbr from 'markdown-it-abbr'
+import markdownitDeflist from 'markdown-it-deflist'
+import markdownitFootnote from 'markdown-it-footnote'
+import markdownitSub from 'markdown-it-sub'
+import markdownitSup from 'markdown-it-sup'
+import extensionSvc from '../services/extensionSvc'
 
 const coreBaseRules = [
   'normalize',
@@ -13,7 +13,7 @@ const coreBaseRules = [
   'linkify',
   'replacements',
   'smartquotes',
-];
+]
 const blockBaseRules = [
   'code',
   'fence',
@@ -26,7 +26,7 @@ const blockBaseRules = [
   'html_block',
   'table',
   'paragraph',
-];
+]
 const inlineBaseRules = [
   'text',
   'newline',
@@ -39,16 +39,16 @@ const inlineBaseRules = [
   'autolink',
   'html_inline',
   'entity',
-];
+]
 const inlineBaseRules2 = [
   'balance_pairs',
   'strikethrough',
   'emphasis',
   'text_collapse',
-];
+]
 
 extensionSvc.onGetOptions(
-  (options, properties) => Object.assign(options, properties.extensions.markdown));
+  (options, properties) => Object.assign(options, properties.extensions.markdown))
 
 extensionSvc.onInitConverter(0, (markdown, options) => {
   markdown.set({
@@ -56,8 +56,8 @@ extensionSvc.onInitConverter(0, (markdown, options) => {
     breaks: !!options.breaks,
     linkify: !!options.linkify,
     typographer: !!options.typographer,
-    langPrefix: 'prism language-',
-  });
+    langPrefix: 'prism language-'
+  })
 
   markdown.core.ruler.enable(coreBaseRules);
 
@@ -176,11 +176,11 @@ extensionSvc.onInitConverter(0, (markdown, options) => {
   };
 });
 
-extensionSvc.onSectionPreview((elt) => {
-  elt.querySelectorAll('.prism').cl_each((prismElt) => {
+extensionSvc.onSectionPreview(elt => {
+  elt.querySelectorAll('.prism').forEach(prismElt => {
     if (!prismElt.highlightedWithPrism) {
-      Prism.highlightElement(prismElt);
-      prismElt.highlightedWithPrism = true;
+      Prism.highlightElement(prismElt)
+      prismElt.highlightedWithPrism = true
     }
-  });
-});
+  })
+})

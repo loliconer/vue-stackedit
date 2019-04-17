@@ -1,4 +1,5 @@
-import utils from '../services/utils';
+import Vue from 'vue'
+import utils from '../services/utils'
 
 export default (empty, simpleHash = false) => {
   // Use Date.now as a simple hash function, which is ok for not-synced types
@@ -38,9 +39,9 @@ export default (empty, simpleHash = false) => {
       setItem,
       patchItem,
       deleteItem(state, id) {
-        Vue.delete(state.itemMap, id);
+        Vue.delete(state.itemMap, id)
       },
     },
     actions: {},
-  };
-};
+  }
+}

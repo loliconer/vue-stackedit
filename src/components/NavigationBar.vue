@@ -7,7 +7,7 @@
       <button class="btn-text" type="button" @click="formatDoc('redo')" title="重做" :disabled="!canRedo">
         <svg><use xlink:href="#editor-fa-redo"></use></svg>
       </button>
-      <button class="btn-text" type="button" v-for="item of items" @click="formatDoc(item)" :title="item.title">
+      <button class="btn-text" type="button" v-for="item of items" @click="formatDoc(item.name)" :title="item.title">
         <svg><use :xlink:href="`#editor-${item.icon}`"></use></svg>
       </button>
       <button class="btn-text" type="button" @click="toggleFullscreen" title="切换全屏">
@@ -18,7 +18,7 @@
   </nav>
 </template>
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
   import editorSvc from '../services/editorSvc'
 
   export default {
@@ -44,20 +44,14 @@
       ...mapState('layout', ['canUndo', 'canRedo', 'fullscreen'])
     },
     methods: {
-      ...mapActions('layout', ['toggleFullscreen']),
+      ...mapMutations('layout', ['toggleFullscreen']),
       formatDoc(cmd) {
         if (cmd === 'undo') return editorSvc.clEditor.undoMgr.undo()
         if (cmd === 'redo') return editorSvc.clEditor.undoMgr.redo()
-        if (cmd.name === 'fullscreen') {
-          this.toggleFullscreen()
-          return
-        }
-        if (cmd.name === 'image') {
-          this.$emit('do-click', cmd.name)
-          return
-        }
+        if (cmd === 'fullscreen') return this.toggleFullscreen()
+        if (cmd === 'image') return this.$emit('upload-img')
 
-        editorSvc.pagedownEditor.uiManager.doClick(cmd.name)
+        editorSvc.pagedownEditor.uiManager.doClick(cmd)
       }
     }
   }

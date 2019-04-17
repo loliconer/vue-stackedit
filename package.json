@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 8089",
     "build": "vue-cli-service build --target lib --name vueStackedit",
     "lint": "vue-cli-service lint"
   },
@@ -12,11 +12,11 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.4",
-    "@vue/cli-service": "^3.0.4",
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
     "bezier-easing": "^2.1.0",
     "diff-match-patch": "^1.0.4",
-    "js-yaml": "^3.12.0",
+    "js-yaml": "^3.13.1",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "lovue": "^2.6.2",
@@ -27,18 +27,18 @@
     "markdown-it-pandoc-renderer": "^1.1.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "prismjs": "^1.15.0",
-    "raw-loader": "^0.5.1",
+    "prismjs": "^1.16.0",
+    "raw-loader": "^2.0.0",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
     "root": true,
     "env": {
+      "es6": true,
       "node": true
     },
     "extends": [
       "plugin:vue/essential",
-      "@vue/standard",
       "eslint:recommended"
     ],
     "rules": {

@@ -1,63 +1,52 @@
-import store from '../../store';
-import animationSvc from '../animationSvc';
-import editorSvc from '../editorSvc';
+import store from '../../store'
+import animationSvc from '../animationSvc'
+import editorSvc from '../editorSvc'
 
-let editorScrollerElt;
-let previewScrollerElt;
-let editorFinishTimeoutId;
-let previewFinishTimeoutId;
-let skipAnimation;
-let isScrollEditor;
-let isScrollPreview;
-let isEditorMoving;
-let isPreviewMoving;
-let sectionDescList;
-
-let throttleTimeoutId;
-let throttleLastTime = 0;
+let editorScrollerElt, previewScrollerElt
+let editorFinishTimeoutId, previewFinishTimeoutId
+let isScrollEditor, isScrollPreview, isEditorMoving, isPreviewMoving, sectionDescList
+let throttleTimeoutId, throttleLastTime = 0
 
 function throttle(func, wait) {
-  clearTimeout(throttleTimeoutId);
-  const currentTime = Date.now();
-  const localWait = (wait + throttleLastTime) - currentTime;
+  clearTimeout(throttleTimeoutId)
+  const currentTime = Date.now()
+  const localWait = (wait + throttleLastTime) - currentTime
   if (localWait < 1) {
-    throttleLastTime = currentTime;
-    func();
+    throttleLastTime = currentTime
+    func()
   } else {
     throttleTimeoutId = setTimeout(() => {
-      throttleLastTime = Date.now();
-      func();
-    }, localWait);
+      throttleLastTime = Date.now()
+      func()
+    }, localWait)
   }
 }
 
 const doScrollSync = () => {
-  const localSkipAnimation = false;
-  skipAnimation = false;
+  const localSkipAnimation = false
   if (!store.state.scrollSync || !sectionDescList || sectionDescList.length === 0) return
-  let editorScrollTop = editorScrollerElt.scrollTop;
-  if (editorScrollTop < 0) {
-    editorScrollTop = 0;
-  }
-  const previewScrollTop = previewScrollerElt.scrollTop;
-  let scrollTo;
+
+  let editorScrollTop = editorScrollerElt.scrollTop
+  if (editorScrollTop < 0) editorScrollTop = 0
+
+  const previewScrollTop = previewScrollerElt.scrollTop
+  let scrollTo
   if (isScrollEditor) {
     // Scroll the preview
-    isScrollEditor = false;
+    isScrollEditor = false
     sectionDescList.some((sectionDesc) => {
-      if (editorScrollTop > sectionDesc.editorDimension.endOffset) {
-        return false;
-      }
+      if (editorScrollTop > sectionDesc.editorDimension.endOffset) return false
+
       const posInSection = (editorScrollTop - sectionDesc.editorDimension.startOffset)
         / (sectionDesc.editorDimension.height || 1);
       scrollTo = (sectionDesc.previewDimension.startOffset
         + (sectionDesc.previewDimension.height * posInSection));
-      return true;
+      return true
     });
     scrollTo = Math.min(
       scrollTo,
       previewScrollerElt.scrollHeight - previewScrollerElt.offsetHeight,
-    );
+    )
 
     throttle(() => {
       clearTimeout(previewFinishTimeoutId);
@@ -106,69 +95,56 @@ const doScrollSync = () => {
   }
 };
 
-let isPreviewRefreshing;
-let timeoutId;
+let isPreviewRefreshing, timeoutId
 
 const forceScrollSync = () => {
-  if (!isPreviewRefreshing) {
-    doScrollSync();
-  }
-};
+  if (!isPreviewRefreshing) doScrollSync()
+}
+
 store.watch(() => store.state.scrollSync, forceScrollSync);
 
 editorSvc.$on('inited', () => {
-  editorScrollerElt = editorSvc.editorElt.parentNode;
-  previewScrollerElt = editorSvc.previewElt.parentNode;
+  editorScrollerElt = editorSvc.editorElt.parentNode
+  previewScrollerElt = editorSvc.previewElt.parentNode
 
   editorScrollerElt.addEventListener('scroll', () => {
-    if (isEditorMoving) {
-      return;
-    }
-    isScrollEditor = true;
-    isScrollPreview = false;
-    doScrollSync();
-  });
+    if (isEditorMoving) return
+
+    isScrollEditor = true
+    isScrollPreview = false
+    doScrollSync()
+  })
 
   previewScrollerElt.addEventListener('scroll', () => {
-    if (isPreviewMoving || isPreviewRefreshing) {
-      return;
-    }
-    isScrollPreview = true;
-    isScrollEditor = false;
-    doScrollSync();
-  });
-});
+    if (isPreviewMoving || isPreviewRefreshing) return
+
+    isScrollPreview = true
+    isScrollEditor = false
+    doScrollSync()
+  })
+})
 
 editorSvc.$on('sectionList', () => {
-  clearTimeout(timeoutId);
-  isPreviewRefreshing = true;
-  sectionDescList = undefined;
-});
+  clearTimeout(timeoutId)
+  isPreviewRefreshing = true
+  sectionDescList = undefined
+})
 
 editorSvc.$on('previewText', () => {
   // Assume the user is writing in the editor
   isScrollEditor = store.state.showEditor;
   // A preview scrolling event can occur if height is smaller
   timeoutId = setTimeout(() => {
-    isPreviewRefreshing = false;
+    isPreviewRefreshing = false
   }, 100);
-});
+})
 
-store.watch(
-  () => store.state.showEditor,
-  (showEditor) => {
-    isScrollEditor = showEditor;
-    isScrollPreview = !showEditor;
-    skipAnimation = true;
-  });
+store.watch(() => store.state.showEditor, showEditor => {
+  isScrollEditor = showEditor
+  isScrollPreview = !showEditor
+})
 
-/*store.watch(
-  () => store.getters['file/current'].id,
-  () => {
-    skipAnimation = true;
-  });*/
-
-editorSvc.$on('sectionDescMeasuredList', (sectionDescMeasuredList) => {
-  sectionDescList = sectionDescMeasuredList;
-  forceScrollSync();
-});
+editorSvc.$on('sectionDescMeasuredList', sectionDescMeasuredList => {
+  sectionDescList = sectionDescMeasuredList
+  forceScrollSync()
+})

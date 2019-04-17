@@ -2,10 +2,10 @@ import moduleTemplate from './moduleTemplate'
 import empty from '../data/emptyContent'
 import utils from '../services/utils'
 
-const _module = moduleTemplate(empty)
+const module = moduleTemplate(empty)
 
-_module.getters = {
-  ..._module.getters,
+module.getters = {
+  ...module.getters,
   current: (state, getters, rootState, rootGetters) => {
     if (state.revisionContent) {
       return state.revisionContent;
@@ -16,8 +16,8 @@ _module.getters = {
   isCurrentEditable: (state, getters, rootState, rootGetters) => rootState.layout.showEditor
 }
 
-_module.actions = {
-  ..._module.actions,
+module.actions = {
+  ...module.actions,
   patchCurrent({ state, getters, commit }, value) {
     const id = getters.current.id;
     if (id && !state.revisionContent) {
@@ -29,4 +29,4 @@ _module.actions = {
   }
 }
 
-export default _module
+export default module

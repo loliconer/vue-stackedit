@@ -6,21 +6,17 @@
         <v-tab :titles="tabTitles" v-model="tabIndex"></v-tab>
       </div>
       <div class="up-panel upload-url" v-if="tabIndex === 0">
-        <div class="input-url">
-          <label class="label">图片地址：</label>
-          <v-input v-model="imageUrl"></v-input>
-        </div>
+        <label class="label">图片地址：</label>
+        <v-input v-model="imageUrl"></v-input>
       </div>
 
       <div class="up-panel upload-file" v-if="tabIndex === 1">
-        <div class="input-file">
-          <v-upload @select="selectFiles" thumbnail></v-upload>
-        </div>
+        <v-upload @select="selectFiles" thumbnail></v-upload>
       </div>
     </v-popup>
 
     <div class="ve-head" v-show="showNavigationBar">
-      <navigation-bar @do-click="clickNavbar"></navigation-bar>
+      <navigation-bar @upload-img="startUpload"></navigation-bar>
     </div>
     <div class="ve-body">
       <div class="ve-editor" :class="{expand: !showPreview}" v-show="showEditor">
@@ -69,12 +65,10 @@
       uploadField: String
     },
     methods: {
-      clickNavbar(cmd) {
-        if (cmd === 'image') {
-          this.imageUrl = ''
-          this.tabIndex = 0
-          this.showUpload = true
-        }
+      startUpload() {
+        this.imageUrl = ''
+        this.tabIndex = 0
+        this.showUpload = true
       },
       selectFiles(files) {
         this.files = files
