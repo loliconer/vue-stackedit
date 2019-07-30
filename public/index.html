@@ -8,32 +8,9 @@
   <script src="https://unpkg.com/vue"></script>
   <script src="./iconfont.js"></script>
   <script src="./lovue.min.js"></script>
-  <script src="./utils.js"></script>
-  <script>
-    window.$fetch = utils.fetch
-  </script>
-  <style>
-    body {
-      background-color: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 40px;
-    }
-
-    pre[class*="language-"] {
-      margin: .5em 0;
-      overflow: auto;
-    }
-  </style>
 </head>
 <body>
-<div id="app">
-  <v-button style="margin: 8px;" @click="getContent">Get Content</v-button>
-  <app></app>
-</div>
+<app></app>
 <!-- built files will be auto injected -->
 </body>
 </html>

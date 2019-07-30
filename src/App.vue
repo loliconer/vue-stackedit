@@ -26,7 +26,7 @@
         <button-bar></button-bar>
       </div>
       <div class="ve-preview" :class="{expand: !showEditor}" v-show="showPreview">
-        <div class="preview-inner blog"></div>
+        <div class="preview-inner"></div>
       </div>
     </div>
   </div>
@@ -114,5 +114,6 @@
   }
 </script>
 <style type="text/less" lang="less">
+  @import "less/prism.css";
   @import "less/style";
 </style>

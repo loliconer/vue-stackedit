@@ -16,7 +16,9 @@ stackedit是基于Vue.js框架开发的，本项目沿用Vue.js框架，使用vu
 
 上传本地图片使用的请求是`lovue`组件库中带的`$fetch.form()`方法，也可以自己定义全局变量`$fetch`。
 
-Demo: [Demo](http://112.74.83.47:8080/)
+自带一个Prism主题实现语法高亮。
+
+[Demo](https://stackedit.now.sh/)
 
 # 开发与编译
 

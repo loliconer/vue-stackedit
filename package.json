@@ -1,35 +1,51 @@
 {
   "name": "vue-stackedit",
-  "version": "1.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "description": "An embedded markdown editor based on stackedit.",
+  "module": "dist/vueStackedit.umd.js",
+  "unpkg": "dist/vueStackedit.umd.min.js",
+  "jsdelivr": "dist/vueStackedit.umd.min.js",
+  "repository": {
+    "url": "https://github.com/loliconer/vue-stackedit.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/loliconer/vue-stackedit/issues"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve --port 8089",
     "build": "vue-cli-service build --target lib --name vueStackedit",
     "lint": "vue-cli-service lint"
   },
+  "author": "loliconer",
+  "license": "MIT",
   "dependencies": {
-    "vue": "^2.5.17",
-    "vuex": "^3.0.1"
+    "vue": "^2.6.10",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.6.0",
-    "@vue/cli-service": "^3.6.0",
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-service": "^3.9.3",
     "bezier-easing": "^2.1.0",
     "diff-match-patch": "^1.0.4",
     "js-yaml": "^3.13.1",
-    "less": "^3.0.4",
-    "less-loader": "^4.1.0",
-    "lovue": "^2.6.2",
-    "markdown-it": "^8.4.2",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "lovue": "^3.1.1",
+    "markdown-it": "^9.0.1",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-deflist": "^2.0.3",
-    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-footnote": "^3.0.2",
     "markdown-it-pandoc-renderer": "^1.1.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "prismjs": "^1.16.0",
-    "raw-loader": "^2.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "prismjs": "^1.17.1",
+    "raw-loader": "^3.1.0",
+    "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
     "root": true,
@@ -50,9 +66,8 @@
     }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie > 0",
-    "not ie_mob > 0"
+    "Chrome >= 70",
+    "Firefox >= 65",
+    "Safari >= 11"
   ]
 }
