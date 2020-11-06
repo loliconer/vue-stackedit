@@ -32,88 +32,88 @@
   </div>
 </template>
 <script>
-  import './extensions'
-  import './services/optional'
-  import CustomSvg from './components/Svg.vue'
-  import NavigationBar from './components/NavigationBar.vue'
-  import ButtonBar from './components/ButtonBar.vue'
-  import editorSvc from './services/editorSvc'
-  import store from './store'
-  import {mapState} from 'vuex'
+import './extensions'
+import './services/optional'
+import CustomSvg from './components/Svg.vue'
+import NavigationBar from './components/NavigationBar.vue'
+import ButtonBar from './components/ButtonBar.vue'
+import editorSvc from './services/editorSvc'
+import store from './store'
+import { mapState } from 'vuex'
 
-  export default {
-    name: 'v-editor',
-    data() {
-      return {
-        tabTitles: [
-          { name: '上传网络图片' },
-          { name: '上传本地图片' }
-        ],
-        tabIndex: 0,
-        showUpload: false,
-        imageUrl: '',
-        files: []
-      }
-    },
-    store,
-    components: { CustomSvg, NavigationBar, ButtonBar },
-    computed: {
-      ...mapState('layout', ['showNavigationBar', 'showPreview', 'showEditor', 'fullscreen'])
-    },
-    props: {
-      url: String,
-      uploadField: String
-    },
-    methods: {
-      startUpload() {
-        this.imageUrl = ''
-        this.tabIndex = 0
-        this.showUpload = true
-      },
-      selectFiles(files) {
-        this.files = files
-      },
-      async uploadImage() {
-        const form = new FormData()
-        for (let i = 0; i < this.files.length; i++) {
-          form.append(this.uploadField || 'files', this.files[i])
-        }
-
-        if (this.tabIndex === 0) {
-          if (this.imageUrl === '') {
-            this.warn('请填写图片地址')
-            return false
-          }
-          this.insertImage(this.imageUrl)
-          return true
-        }
-
-        const body = await $fetch.form(this.url || 'files', form).catch(this.error)
-        if (body === undefined) return
-
-        this.insertImage(body)
-        return true
-      },
-      insertImage(url) {
-        store.commit('setUrl', url)
-        editorSvc.pagedownEditor.uiManager.doClick('image')
-      },
-      getContent() {
-        return editorSvc.clEditor.getContent()
-      },
-      setContent(text) {
-        editorSvc.clEditor.setContent(text)
-      }
-    },
-    mounted() {
-      const editorElt = this.$el.querySelector('.ve-editor .editor-inner')
-      const previewElt = this.$el.querySelector('.ve-preview .preview-inner')
-      const tocElt = this.$el.querySelector('.ve-head')
-      editorSvc.init(editorElt, previewElt, tocElt)
+export default {
+  name: 'v-editor',
+  data() {
+    return {
+      tabTitles: [
+        { name: '上传网络图片' },
+        { name: '上传本地图片' }
+      ],
+      tabIndex: 0,
+      showUpload: false,
+      imageUrl: '',
+      files: []
     }
+  },
+  store,
+  components: { CustomSvg, NavigationBar, ButtonBar },
+  computed: {
+    ...mapState('layout', ['showNavigationBar', 'showPreview', 'showEditor', 'fullscreen'])
+  },
+  props: {
+    url: String,
+    uploadField: String
+  },
+  methods: {
+    startUpload() {
+      this.imageUrl = ''
+      this.tabIndex = 0
+      this.showUpload = true
+    },
+    selectFiles(files) {
+      this.files = files
+    },
+    async uploadImage() {
+      const form = new FormData()
+      for (let i = 0; i < this.files.length; i++) {
+        form.append(this.uploadField || 'files', this.files[i])
+      }
+
+      if (this.tabIndex === 0) {
+        if (this.imageUrl === '') {
+          this.warn('请填写图片地址')
+          return false
+        }
+        this.insertImage(this.imageUrl)
+        return true
+      }
+
+      const body = await $fetch.form(this.url || 'files', form).catch(this.error)
+      if (body === undefined) return
+
+      this.insertImage(body)
+      return true
+    },
+    insertImage(url) {
+      store.commit('setUrl', url)
+      editorSvc.pagedownEditor.uiManager.doClick('image')
+    },
+    getContent() {
+      return editorSvc.clEditor.getContent()
+    },
+    setContent(text) {
+      editorSvc.clEditor.setContent(text)
+    }
+  },
+  mounted() {
+    const editorElt = this.$el.querySelector('.ve-editor .editor-inner')
+    const previewElt = this.$el.querySelector('.ve-preview .preview-inner')
+    const tocElt = this.$el.querySelector('.ve-head')
+    editorSvc.init(editorElt, previewElt, tocElt)
   }
+}
 </script>
 <style type="text/less" lang="less">
-  @import "less/prism.css";
-  @import "less/style";
+@import "less/prism.css";
+@import "less/style";
 </style>

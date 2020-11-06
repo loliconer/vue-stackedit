@@ -1,11 +1,6 @@
 module.exports = {
   css: {
-    extract: false,
-    loaderOptions: {
-      less: {
-        strictMath: 'on'
-      }
-    }
+    extract: false
   },
   chainWebpack: config => {
     config.performance.hints(false)
