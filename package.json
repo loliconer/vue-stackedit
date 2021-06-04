@@ -2,33 +2,24 @@
   "name": "vue-stackedit",
   "version": "1.0.0",
   "description": "An embedded markdown editor based on stackedit.",
-  "module": "dist/vueStackedit.umd.js",
-  "unpkg": "dist/vueStackedit.umd.min.js",
-  "jsdelivr": "dist/vueStackedit.umd.min.js",
-  "repository": {
-    "url": "https://github.com/loliconer/vue-stackedit.git",
-    "type": "git"
-  },
-  "bugs": {
-    "url": "https://github.com/loliconer/vue-stackedit/issues"
-  },
-  "files": [
-    "src",
-    "dist"
-  ],
+  "author": "loliconer",
   "scripts": {
     "serve": "vue-cli-service serve --port 8089",
     "build": "vue-cli-service build --target lib --name vueStackedit",
     "lint": "vue-cli-service lint"
   },
-  "author": "loliconer",
-  "license": "MIT",
+  "module": "dist/vueStackedit.umd.js",
+  "unpkg": "dist/vueStackedit.umd.min.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "dependencies": {
     "vue": "^2.6.12",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.8",
+    "@vue/cli-plugin-babel": "^4.5.13",
     "@vue/cli-service": "^4.5.8",
     "bezier-easing": "^2.1.0",
     "diff-match-patch": "^1.0.5",
@@ -69,5 +60,14 @@
     "Chrome >= 70",
     "Firefox >= 65",
     "Safari >= 11"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/loliconer/vue-stackedit/issues"
+  },
+  "jsdelivr": "dist/vueStackedit.umd.min.js",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/loliconer/vue-stackedit.git",
+    "type": "git"
+  }
 }
