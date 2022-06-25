@@ -1,6 +1,6 @@
 # Overview
 
-目前推荐所见即所得式的slatejs或者tinymce。
+stackedi已经长期没更新了，目前推荐所见即所得式的slatejs或者tinymce。
 
 [官方可集成版本](https://benweet.github.io/stackedit.js/)
 
