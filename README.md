@@ -1,5 +1,7 @@
 # Overview
 
+目前推荐所见即所得式的slatejs或者tinymce。
+
 [官方可集成版本](https://benweet.github.io/stackedit.js/)
 
 Vue-stackedit 是基于 [stackedit](https://stackedit.io) 开发的一款在线markdown编辑器。
